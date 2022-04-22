@@ -1,17 +1,15 @@
 :root {
   --gray: rgb(190, 186, 186);
-  --gainsboro: gainsboro;
-  --black: black;
-  --darkgray: rgb(111, 109, 109);
+  --default: gainsboro;
 }
 
 body {
-  background-color: var(--gainsboro);
+  background-color: var(--default);
   text-align: center;
 }
 
 .border {
-  border: 1px solid var(--black);
+  border: 1px solid black;
 }
 
 .secondary-header {
@@ -50,7 +48,7 @@ h4 {
   position: absolute;
   margin-top: 5px;
   z-index: 1;
-  background-color: var(--gainsboro);
+  background-color: var(--default);
 }
 
 .card-subheader {
@@ -63,7 +61,7 @@ h4 {
 }
 
 .card-snippet {
-  background-color: var(--darkgray);
+  background-color: rgb(111, 109, 109);
   margin: 8%;
   width: 84%;
 }
@@ -71,5 +69,5 @@ h4 {
 .footer {
   display: flex;
   justify-content: center;
-  background-color: var(--gainsboro);
+  background-color: var(--default);
 }
