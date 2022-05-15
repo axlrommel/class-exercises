@@ -13,36 +13,37 @@
 
 var rowDiv = document.querySelector("#cards");
 
-function onload() {
+function buildCard(songData) {
+  var cardDiv = document.createElement("div");
+  cardDiv.setAttribute("class", "card col-lg-4 col-md-6 col-sm-12 text-center");
+  var cardBody = document.createElement("div");
+  cardBody.setAttribute("class", "card-body");
+  var paragraph = document.createElement("p");
+  paragraph.textContent = songData.song;
+  var audio = document.createElement("audio");
+  audio.setAttribute("controls", "");
+  audio.textContent = "Your browser does not support the audio element.";
+  var source = document.createElement("source");
+  source.setAttribute("src", songData.url);
+  source.setAttribute("type", "audio/mpeg");
+  audio.appendChild(source);
+  cardBody.appendChild(paragraph);
+  cardBody.appendChild(audio);
+  cardDiv.appendChild(cardBody);
+  rowDiv.appendChild(cardDiv);
+}
+
+function initialize() {
   fetch("https://band-backend-obmzk.ondigitalocean.app/music")
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
       for (let i = 0; i < data.length; i++) {
-        var cardDiv = document.createElement("div");
-        cardDiv.setAttribute(
-          "class",
-          "card col-lg-4 col-md-6 col-sm-12 text-center"
-        );
-        var cardBody = document.createElement("div");
-        cardBody.setAttribute("class", "card-body");
-        var paragraph = document.createElement("p");
-        paragraph.textContent = data[i].song;
-        var audio = document.createElement("audio");
-        audio.setAttribute("controls", "");
-        audio.textContent = "Your browser does not support the audio element.";
-        var source = document.createElement("source");
-        source.setAttribute("src", data[i].url);
-        source.setAttribute("type", "audio/mpeg");
-        audio.appendChild(source);
-        cardBody.appendChild(paragraph);
-        cardBody.appendChild(audio);
-        cardDiv.appendChild(cardBody);
-        rowDiv.appendChild(cardDiv);
+        buildCard(data[i]);
       }
     })
     .catch((err) => console.log(err));
 }
 
-onload();
+initialize();
