@@ -47,15 +47,14 @@ const input = [
   { name: "Donnahue", interests: ["Python"], location: "NY" },
 ];
 
-const output = { Rommel: true, Charlie: true, Donnahue: true };
-const output1 = { Rommel: false, Charlie: true, Donnahue: true };
+const playersObject = { Rommel: true, Charlie: true, Donnahue: true };
 
-const initializeUsers = (arr) =>
+const initializePlayers = (arr) =>
   arr.reduce((accumulator, current) => {
     return { ...accumulator, [current.name]: true };
   }, {});
 
-const countUsers = (userObject) => Object.keys(userObject).length;
+const countPlayers = (userObject) => Object.keys(userObject).length;
 
 const countDead = (userObject) =>
   Object.values(userObject).filter((e) => e === false).length;
@@ -63,15 +62,19 @@ const countDead = (userObject) =>
 const countAlive = (userObject) =>
   Object.values(userObject).filter((e) => e === true).length;
 
-const eliminated = (userObject, playerName) => ({
+const killPlayer = (playerName, userObject) => ({
   ...userObject,
   [playerName]: false,
 });
 
-assert.deepEqual(output, initializeUsers(input));
-assert.deepEqual(countUsers(output), 3);
-assert.deepEqual(countDead(output), 0);
-assert.deepEqual(countAlive(output), 3);
-assert.deepEqual(output1, eliminated(output, "Rommel"));
-assert.deepEqual(countDead(output1), 1);
+assert.deepEqual(playersObject, initializePlayers(input));
+assert.equal(countPlayers(playersObject), 3);
+assert.equal(countDead(playersObject), 0);
+assert.equal(countAlive(playersObject), 3);
+assert.deepEqual(killPlayer("Rommel", playersObject), {
+  Rommel: false,
+  Charlie: true,
+  Donnahue: true,
+});
+assert.equal(countDead({ Rommel: false, Charlie: true, Donnahue: true }), 1);
 console.log("All tests pass");
