@@ -8,8 +8,9 @@ body {
   text-align: center;
 }
 
-.border {
-  border: 1px solid black;
+h4 {
+  width: 70%;
+  height: 30px;
 }
 
 .secondary-header {
@@ -18,9 +19,8 @@ body {
   background-color: var(--gray);
 }
 
-h4 {
-  width: 70%;
-  height: 30px;
+.border {
+  border: 1px solid black;
 }
 
 .cards-container {
